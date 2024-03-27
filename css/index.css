@@ -26,7 +26,13 @@
   margin-top: -20vh;
   z-index: 3;
 }
+@font-face {
+  font-family: EDIX;
+  src: url("/font/EDIX.ttf");
+  font-style: italic;
+}
 .wall-title {
+  font-family: EDIX;
   font-weight: 600;
   font-size: 72px;
   animation: flyIn 500ms ease-out;
@@ -34,7 +40,7 @@
 .wall-subtitle {
   font-size: 36px;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .wall-description {
   font-size: 20px;
@@ -418,6 +424,12 @@
   .wall {
     height: calc(100vh - 60px);
   }
+  .wall-title {
+    font-size: 62px;
+  }
+  .wall-subtitle {
+    margin-top: 15px;
+  }
   .hello-world {
     left: 20px;
   }
@@ -435,6 +447,12 @@
   }
 }
 @media screen and (max-width: 415px) {
+  .wall-title {
+    font-size: 48px;
+  }
+  .wall-subtitle {
+    margin-top: 10px;
+  }
   .timeline {
     margin: 200px auto;
   }
