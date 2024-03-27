@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <title>
+      
+        JavaScript中reduce的用法 | PAOLOS.SITE
+      
+    </title>
+    <meta name="description" content="毕竟几人真得鹿的生活、技术博客" />
+    <meta name="keywords" content="博客 毕竟几人真得鹿 毕竟几人真得鹿的博客" />
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png" />
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color="" />
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/normal.ttf);
+        font-weight: normal;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css' />
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css"/>
+  
+
+  <meta name="generator" content="Hexo 6.3.0"></head>
+  <body>
+    
+      <div id="search-mask" style="display:none">
+  <div class="search-main" id="search-main">
+    <div class="search__head">
+      <div class="search-form">
+        <svg t="1706347533072"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="7828"
+             width="20"
+             height="20">
+          <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+          </path>
+        </svg>
+        <input id="search-input" placeholder="搜索文章">
+        <svg t="1706361500528"
+             id="search-clear"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="4351"
+             width="20"
+             height="20">
+          <path d="M512 562.688l-264.2944 264.2944-50.688-50.688L461.312 512 197.0176 247.7056l50.688-50.688L512 461.312l264.2944-264.2944 50.688 50.688L562.688 512l264.2944 264.2944-50.688 50.688L512 562.688z" fill="#00" p-id="4352">
+          </path>
+        </svg>
+      </div>
+    </div>
+    <div class="search__body" id="search-result"></div>
+    <div class="search__foot"></div>
+  </div>
+</div>
+
+    
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg" />
+        </a>
+        <input id="navBtn" type="checkbox" />
+        <div class="nav-right">
+          
+            <div class="search-outer">
+  <div class="search" id="search-btn">
+    <svg t="1706347533072"
+         class="icon"
+         viewBox="0 0 1024 1024"
+         version="1.1"
+         xmlns="http://www.w3.org/2000/svg"
+         p-id="7828"
+         width="20"
+         height="20">
+      <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+      </path>
+    </svg>
+    <span>搜索</span>
+    <span class="search-shortcut-key">Ctrl K</span>
+  </div>
+</div>
+
+          
+          <div class="nav-menu">
+            
+              
+                <a class="nav-menu-item" href="/developer">开发者</a>
+              
+                <a class="nav-menu-item" href="/essay">随笔</a>
+              
+            
+            
+          </div>
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">JavaScript中reduce的用法</div>
+        <div class="post-info">
+          
+  <a href="/tags/JavaScript/" class="post-tag">#JavaScript</a><a href="/tags/%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" class="post-tag">#数组方法</a>
+
+
+          <span class="post-date">2023-03-19</span>
+        </div>
+      </div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><code>reduce()</code>：对数组中的每个元素执行回调，并将结果返回。<br><code>reduce()</code>：该方法在数组中从左到右工作，与之相对的有 <code>reduceRight()</code>。</p>
+<p>常可用于数组求和、数组求积、数组去重等等。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr.<span class="title function_">reduce</span>(<span class="function">(<span class="params">prev, cur, index, arr</span>) =&gt;</span> &#123;</span><br><span class="line">...</span><br><span class="line">&#125;, init)</span><br></pre></td></tr></table></figure>
+
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>可选</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>prev</td>
+<td>必须</td>
+<td>累计回调的返回值；表示上一次调用回调时的返回值或初始值 init</td>
+</tr>
+<tr>
+<td>cur</td>
+<td>必须</td>
+<td>当前正在处理的元素</td>
+</tr>
+<tr>
+<td>index</td>
+<td>可选</td>
+<td>当前正在处理的元素索引；若提供init值，则起始索引为0，否则为1</td>
+</tr>
+<tr>
+<td>arr</td>
+<td>可选</td>
+<td>原数组</td>
+</tr>
+<tr>
+<td>init</td>
+<td>可选</td>
+<td>第一次执行时的初始值</td>
+</tr>
+</tbody></table>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h4 id="未设置初始值-init"><a href="#未设置初始值-init" class="headerlink" title="未设置初始值 init"></a>未设置初始值 <code>init</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">const</span> sum = array.<span class="title function_">reduce</span>(<span class="function">(<span class="params">prev, cur, index, arr</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(prev, cur, index);</span><br><span class="line">  <span class="keyword">return</span> prev + cur;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;sum: &#x27;</span>, sum);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行结果：</span></span><br><span class="line"><span class="comment">// 1 2 1</span></span><br><span class="line"><span class="comment">// 3 3 2</span></span><br><span class="line"><span class="comment">// 6 4 3</span></span><br><span class="line"><span class="comment">// sum: 10</span></span><br></pre></td></tr></table></figure>
+<p>reduce()进行三次迭代，首次迭代中 prev 的值为1，即数组第一项，而后的迭代中 prev 的值是每次回调计算后的值。</p>
+<h4 id="设置初始值-init"><a href="#设置初始值-init" class="headerlink" title="设置初始值 init"></a>设置初始值 <code>init</code></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> array = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">const</span> sum = array.<span class="title function_">reduce</span>(<span class="function">(<span class="params">prev, cur, index, arr</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(prev, cur, index);</span><br><span class="line">  <span class="keyword">return</span> prev + cur;</span><br><span class="line">&#125;, <span class="number">10</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;sum: &#x27;</span>, sum);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 运行结果：</span></span><br><span class="line"><span class="comment">// 10 1 0</span></span><br><span class="line"><span class="comment">// 11 2 1</span></span><br><span class="line"><span class="comment">// 13 3 2</span></span><br><span class="line"><span class="comment">// 16 4 3</span></span><br><span class="line"><span class="comment">// sum: 20</span></span><br></pre></td></tr></table></figure>
+<p>由此可看出当设置初始值时，首次迭代 prev 即为 init 的值，且 index 初始索引为0。</p>
+<h2 id="reduce-的应用"><a href="#reduce-的应用" class="headerlink" title="reduce()的应用"></a>reduce()的应用</h2><h4 id="数组求和"><a href="#数组求和" class="headerlink" title="数组求和"></a>数组求和</h4><h4 id="计算数组每个元素出现次数"><a href="#计算数组每个元素出现次数" class="headerlink" title="计算数组每个元素出现次数"></a>计算数组每个元素出现次数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> names = [<span class="string">&#x27;Xiaoming&#x27;</span>, <span class="string">&#x27;Wei&#x27;</span>, <span class="string">&#x27;Xiaohu&#x27;</span>, <span class="string">&#x27;Xiaohu&#x27;</span>, <span class="string">&#x27;Gala&#x27;</span>, <span class="string">&#x27;Wei&#x27;</span>, <span class="string">&#x27;Letme&#x27;</span>, <span class="string">&#x27;Xiaohu&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> countNames = names.<span class="title function_">reduce</span>(<span class="function">(<span class="params">prev, cur</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(prev, cur);</span><br><span class="line">  <span class="keyword">if</span> (cur <span class="keyword">in</span> prev) &#123;</span><br><span class="line">    prev[cur]++;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    prev[cur] = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> prev;</span><br><span class="line">&#125;, &#123;&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(countNames);</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;&#125; &#x27;Xiaoming&#x27;</span></span><br><span class="line"><span class="comment">// &#123;Xiaoming: 1&#125; &#x27;Wei&#x27;</span></span><br><span class="line"><span class="comment">// &#123;Xiaoming: 1, Wei: 1&#125; &#x27;Xiaohu&#x27;</span></span><br><span class="line"><span class="comment">// &#123;Xiaoming: 1, Wei: 1, Xiaohu: 1&#125; &#x27;Xiaohu&#x27;</span></span><br><span class="line"><span class="comment">// &#123;Xiaoming: 1, Wei: 1, Xiaohu: 2&#125; &#x27;Gala&#x27;</span></span><br><span class="line"><span class="comment">// &#123;Xiaoming: 1, Wei: 1, Xiaohu: 2, Gala: 1&#125; &#x27;Wei&#x27;</span></span><br><span class="line"><span class="comment">// &#123;Xiaoming: 1, Wei: 2, Xiaohu: 2, Gala: 1&#125; &#x27;Letme&#x27;</span></span><br><span class="line"><span class="comment">// &#123;Xiaoming: 1, Wei: 2, Xiaohu: 3, Gala: 1, Letme: 1&#125; &#x27;Xiaohu&#x27;</span></span><br><span class="line"><span class="comment">// &#123;Xiaoming: 1, Wei: 2, Xiaohu: 3, Gala: 1, Letme: 1&#125;</span></span><br></pre></td></tr></table></figure>
+<p>关键在于将初始值设置为空对象<code>&#123;&#125;</code>，当首次迭代时判断 prev 中没有 <code>Xiaoming</code> 这个属性，因此就将 <code>Xiaoming</code> 作为属性名加入空对象，并给其赋值为1；下一次迭代时若遇到重复元素，该属性自加1。</p>
+<h4 id="数组元素去重"><a href="#数组元素去重" class="headerlink" title="数组元素去重"></a>数组元素去重</h4><p>🏗 未完待续</p>
+
+      </div>
+    </div>
+    
+      <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script>
+      <script>
+        if (window.mermaid) {
+          mermaid.initialize({"startOnload":true});
+        }
+      </script>
+    
+  </article>
+  <div class="post__foot">
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2023/03/20/%E5%88%9D%E8%AF%86Pinia/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>初识Pinia</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2023/03/18/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B7%AF%E7%94%B1%E7%AF%87/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+      </div>
+      微信小程序之路由
+    </a>
+  
+</div>
+
+    
+      <div class="related-post">
+  <div class="related__head">
+  <a href="/tags/JavaScript/" class="post-tag">#JavaScript</a><a href="/tags/%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" class="post-tag">#数组方法</a>
+
+</div>
+  <div class="realated__body">
+    
+      <div class="null"><div class="null-item"><div class="null-title"><a href="\2023\03\20\初识Pinia\" title="初识Pinia" rel="bookmark">初识Pinia</a></div></div><div class="null-item"><div class="null-title"><a href="\2023\09\01\打包体积的分析和优化\" title="打包体积的分析和优化" rel="bookmark">打包体积的分析和优化</a></div></div></div>
+    
+  </div>
+</div>
+
+    
+    
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              <div class="matts">夸</div><div class="matts">你</div><div class="matts">可</div><div class="matts">爱</div>
+            </div>
+          
+            <div class="foot-line">
+              <div class="matts">好</div><div class="matts">像</div><div class="matts">骂</div><div class="matts">你</div><div class="matts">怯</div><div class="matts">懦</div>
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+            <div class="foot-item">
+              <div class="foot-item__head">朋友</div>
+              <div class="foot-item__body">
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/icon/icon-link.svg" />
+                    <a class="foot-link" target="_blank" rel="noopener" href="https://hozen.site">浩然的主页</a>
+                  </div>
+                
+                <div class="text">
+                  <img alt="link" height="20px" width="20px" src="/images/icon/icon-link+.svg" />
+                  <a class="foot-link"
+                     href="mailto:1272487263@qq.com?subject=%E7%94%B3%E8%AF%B7%20Hozen.site%20%E7%9A%84%E5%8F%8B%E9%93%BE%E4%BD%8D%E7%BD%AE">
+                  申请友链</a>
+                </div>
+              </div>
+            </div>
+          
+          
+            <div class="foot-item">
+              <div class="foot-item__head">账号</div>
+              <div class="foot-item__body">
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/logo-github.svg" />
+                    <a class="foot-link" href="https://github.com/nf173">github</a>
+                  </div>
+                
+              </div>
+            </div>
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg" />
+                <a class="foot-link" href="mailto:1272487263@qq.com">1272487263@qq.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="https://github.com/nf173/nf173.github.io">PAOLOS.SITE</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z" />
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z" />
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z" />
+          </svg>
+          <a href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+    
+      <script src="/js/search.js"></script>
+      <script>searchInitialize("/search.json")</script>
+    
+    
+  
+
+  </body>
+</html>
